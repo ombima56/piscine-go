@@ -2,7 +2,7 @@ package piscine
 
 func IsPrintable(s string) bool {
 	for _, char := range s {
-		if char >= 'a' && char <= 'z' || char >= 'A' && char <= 'Z' {
+		if char >= 32 && char <= 127 {
 			continue
 		} else {
 			return false
