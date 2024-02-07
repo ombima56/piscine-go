@@ -8,7 +8,7 @@ func FoodDeliveryTime(order string) int {
 	menu := map[string]food{
 		"burger":  {preptime: 15},
 		"chips":   {preptime: 10},
-		"nuggest": {preptime: 12},
+		"nuggets": {preptime: 12},
 	}
 
 	if val, ok := menu[order]; ok {
