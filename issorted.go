@@ -8,7 +8,3 @@ func IsSorted(f func(a, b int) int, a []int) bool {
 	}
 	return true
 }
-
-func f(a, b int) int {
-	return a - b
-}
