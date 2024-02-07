@@ -4,7 +4,7 @@ func IsSorted(f func(a, b int) int, a []int) bool {
 	length := len(a)
 
 	first_arg := true
-	second_arg := false
+	second_arg := true
 
 	for i := 1; i < length; i++ {
 		if !(f(a[i-1], a[i]) >= 0) {
