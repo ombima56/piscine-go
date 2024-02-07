@@ -10,8 +10,9 @@ func FoodDeliveryTime(order string) int {
 		"chips":   {preptime: 10},
 		"nuggest": {preptime: 12},
 	}
-	if i, ok := menu[order]; ok {
-		return i.preptime
+
+	if val, ok := menu[order]; ok {
+		return val.preptime
 	}
 	return 404
 }
