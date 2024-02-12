@@ -1,5 +1,7 @@
 package piscine
 
+type ExistingNodel = NodeL
+
 type NodeL struct {
 	Data interface{}
 	Next *NodeL
