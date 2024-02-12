@@ -1,16 +1,6 @@
 package piscine
 
-type NodeL struct {
-	Data interface{}
-	Next *NodeL
-}
-
-type list struct {
-	Head *NodeL
-	Tail *NodeL
-}
-
-func ListPushFront(l *list, data interface{}) {
+func ListPushFront(l *List, data interface{}) {
 	q := &NodeL{Data: data}
 	if l.Head == nil {
 		l.Head = q
