@@ -1,16 +1,6 @@
 package piscine
 
-type NodeK struct {
-	Data interface{}
-	Next *NodeK
-}
-
-type list struct {
-	Head *NodeK
-	Tail *NodeK
-}
-
-func ListLast(l *list) interface{} {
+func listLast(l *List) interface{} {
 	if l.Head == nil {
 		return nil
 	}
