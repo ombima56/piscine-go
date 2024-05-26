@@ -19,8 +19,8 @@ func main() {
 	if (value1 >= 9223372036854775807 || value1 <= -9223372036854775808) ||
 		(value2 >= 9223372036854775807 || value2 <= -9223372036854775808) {
 		return
-
 	}
+
 	var result int
 	switch operator {
 	case "+":
