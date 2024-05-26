@@ -43,7 +43,6 @@ func main() {
 
 	if result >= 9223372036854775804 || result <= -9223372036854775808 {
 		return
-
 	}
 	Itoa(result)
 }
