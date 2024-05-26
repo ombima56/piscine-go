@@ -16,12 +16,6 @@ func main() {
 	if err1 != nil || err2 != nil {
 		return
 	}
-	if (value1 >= 9223372036854775807 || value1 <= -9223372036854775808) ||
-		(value2 >= 9223372036854775807 || value2 <= -9223372036854775808) ||
-		(string(value1) >= "9223372036854775807" || string(value1) <= "-9223372036854775808") ||
-		(string(value2) >= "9223372036854775807" || string(value2) <= "-9223372036854775808"){
-		return
-	}
 
 	var result int
 	switch operator {
@@ -45,6 +39,11 @@ func main() {
 		result = value1 % value2
 	default:
 		return
+	}
+
+	if result >= 9223372036854775804 || result <= -9223372036854775808 {
+		return
+
 	}
 	Itoa(result)
 }
