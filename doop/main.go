@@ -8,102 +8,82 @@ func main() {
 	if len(os.Args) != 4 {
 		return
 	}
+	value1, operator, value2 := os.Args[1], os.Args[2], os.Args[3]
 
-	value1, err1 := Atoi(os.Args[1])
-	operator := os.Args[2]
-	value2, err2 := Atoi(os.Args[3])
+	result := Calculation(value1, operator, value2)
 
-	if err1 != nil || err2 != nil {
-		return
+	if result != "" {
+		os.Stdout.WriteString(result)
+		os.Stdout.WriteString("\n")
 	}
+}
 
-	var result int
+func Calculation(a, operator, b string) string {
+	value1, ok1 := Atoi(a)
+	value2, ok2 := Atoi(b)
+
+	if !ok1 || !ok2 {
+		return ""
+	}
+	if (value1 >= 9223372036854775807 || value1 <= -9223372036854775807) || (value2 >= 9223372036854775807 || value2 <= -9223372036854775807) {
+		return ""
+	}
+	q := 0
 	switch operator {
 	case "+":
-		result = value1 + value2
+		q = value1 + value2
 	case "-":
-		result = value1 - value2
+		q = value1 - value2
 	case "*":
-		result = value1 * value2
+		q = value1 * value2
 	case "/":
 		if value2 == 0 {
-			noDivisionByZero()
-			return
+			return "No division by 0"
 		}
-		result = value1 / value2
+		q = value1 / value2
 	case "%":
 		if value2 == 0 {
-			noModuloByZero()
-			return
+			return "No modulo by 0"
 		}
-		result = value1 % value2
+		q = value1 % value2
 	default:
-		return
+		return ""
 	}
-
-	if result >= 9223372036854775804 || result <= -9223372036854775808 {
-		return
-	}
-	Itoa(result)
+	return Itoa(q)
 }
 
-func noDivisionByZero() {
-	printError("No division by 0")
-}
-
-func noModuloByZero() {
-	printError("No modulo by 0")
-}
-
-func printError(msg string) {
-	for _, char := range msg {
-		os.Stdout.WriteString(string(char))
-	}
-	os.Stdout.WriteString("\n")
-}
-
-func Atoi(s string) (int, error) {
-	sign := 1
-	var number int
-
-	for i, ch := range s {
-		if i == 0 && ch == '-' {
-			sign = -1
-		} else if i == 0 && ch == '+' {
-			sign = 1
-		} else if ch < '0' || ch > '9' {
-			return 0, &InvalidDigitError{ch}
-		} else {
-			number = number*10 + int(ch-'0')
-		}
-	}
-	return sign * number, nil
-}
-
-type InvalidDigitError struct {
-	Ch rune
-}
-
-func (e *InvalidDigitError) Error() string {
-	return "invalid digit: " + string(e.Ch)
-}
-
-func Itoa(n int) {
+func Itoa(n int) string {
 	if n == 0 {
-		os.Stdout.WriteString("0")
+		return "0"
 	}
+	sign := ""
 	if n < 0 {
-		os.Stdout.WriteString("-")
+		sign = "-"
 		n = -n
 	}
-	var digits []rune
-	for n > 0 {
-		digit := n % 10
-		digits = append([]rune{rune('0' + digit)}, digits...)
+	q := ""
+	if n > 0 {
+		digits := n % 10
+		q = string(rune('0'+digits)) + q
 		n /= 10
 	}
-	for _, num := range digits {
-		os.Stdout.WriteString(string(num))
+	return sign + q
+}
+
+func Atoi(s string) (int, bool) {
+	sign := 1
+	q := 0
+
+	for i, v := range s {
+		if v == '-' && i == 0 {
+			sign = -1
+		} else if v == '+' && i == 0 {
+			sign = 1
+		} else if v >= '0' && v <= '9' {
+			q = q*10 + int(v-'0')
+		} else {
+			return 0, false
+		}
 	}
-	os.Stdout.WriteString("\n")
+	return sign * q, true
 }
